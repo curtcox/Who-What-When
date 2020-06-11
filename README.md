@@ -24,7 +24,9 @@ as fact generally takes the form of a (subject verb object) triple.
 There are also facts that take another form
 
 - (X is-in Y) and (Y is-in Z) implies (X is-in Z)
-- (M is-mother-of A) and (M is-mother-of B) implies (A is-sibling-of B) 
+- (M is-mother-of A) and (M is-mother-of B) implies (A is-sibling-of B)
+- (X R Y) and (R is-inverse-of S) implies (Y S R)
+As in (is-short-for is-inverse-of is-full-name)
 
 # Metadata - Who & When
 In addition to what is being asserted, all facts are asserted by some one
