@@ -5,7 +5,7 @@ import javax.swing.*;
 class App extends JPanel {
 
     App() {
-        add(new JScrollPane(AppTable.newInstance()));
+        add(AppTable.newInstance());
     }
 
 }
