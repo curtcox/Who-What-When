@@ -3,6 +3,7 @@ package com.curtcox.www;
 import javax.swing.*;
 import javax.swing.table.*;
 import java.awt.*;
+import java.util.Collection;
 
 class AppTable extends JPanel {
 
@@ -18,16 +19,14 @@ class AppTable extends JPanel {
         var buttons = new JPanel();
         buttons.add(back);
         buttons.add(forward);
-        add(buttons,BorderLayout.NORTH);
+        add(buttons, BorderLayout.NORTH);
         add(scroll,BorderLayout.CENTER);
     }
 
-    static AppTable newInstance() {
-        TableModel model = AppTableModel.tableModel();
+    static AppTable fromRows(Collection<Row> rows) {
+        TableModel model = AppTableModel.fromRows(rows);
         JTable table = new JTable(model);
-
         configureTable(model, table);
-
         return new AppTable(table);
     }
 

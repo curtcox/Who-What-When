@@ -5,15 +5,18 @@ import javax.swing.event.TableModelListener;
 import javax.swing.table.TableModel;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
-class AppTableModel implements TableModel {
+final class AppTableModel implements TableModel {
 
-    String[] columnNames = {"Picture", "Text"};
-    Object[][] data = {
-            {icon("http://placekitten.com/100/200"), "Text 1"},
-            {icon("http://placekitten.com/100/200"), "Text 2"},
-            {icon("http://placekitten.com/100/200"), "Text 3"},
-    };
+    final String[] columnNames = new String[] {"edge","node"};
+    final List<Row> rows;
+
+    AppTableModel(Collection<Row> rows) {
+        this.rows = new ArrayList(rows);
+    }
 
     private static ImageIcon icon(String url) {
         try {
@@ -23,19 +26,21 @@ class AppTableModel implements TableModel {
         }
     }
 
-    static TableModel tableModel() {
-        return new AppTableModel();
+    static TableModel fromRows(Collection<Row> rows) {
+        return new AppTableModel(rows);
     }
 
     @Override public boolean isCellEditable(int rowIndex, int columnIndex) { return false; }
 
-    @Override public int     getRowCount()                 { return data.length; }
-    @Override public int     getColumnCount()              { return columnNames.length; }
+    @Override public int     getRowCount()                 { return rows.size(); }
+    @Override public int     getColumnCount()              { return 2; }
 
     @Override public String getColumnName(int columnIndex) { return columnNames[columnIndex]; }
     @Override public Class<?> getColumnClass(int column)   { return getValueAt(0, column).getClass(); }
 
-    @Override public Object getValueAt(int rowIndex, int columnIndex) { return data[rowIndex][columnIndex]; }
+    @Override public Object getValueAt(int rowIndex, int columnIndex) {
+        return rows.get(rowIndex).getValueAt(columnIndex);
+    }
     @Override public void   setValueAt(Object aValue, int rowIndex, int columnIndex) { never(); }
 
     @Override public void    addTableModelListener(TableModelListener l) { }
