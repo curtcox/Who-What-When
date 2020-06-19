@@ -1,29 +1,19 @@
 package com.curtcox.www;
 
-import javax.swing.*;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.TableModel;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
 final class AppTableModel implements TableModel {
 
-    final String[] columnNames = new String[] {"edge","node"};
     final List<Row> rows;
+    final String[] columnNames;
 
     AppTableModel(Collection<Row> rows) {
         this.rows = new ArrayList(rows);
-    }
-
-    private static ImageIcon icon(String url) {
-        try {
-            return new ImageIcon(new URL(url));
-        } catch (MalformedURLException e) {
-            throw new RuntimeException(e);
-        }
+        columnNames = this.rows.get(0).columnNames();
     }
 
     static TableModel fromRows(Collection<Row> rows) {

@@ -6,9 +6,13 @@ final class Edge {
     final Node from;
     final Node via; // edge type
 
-    Edge(Node to, Node from, Node via) {
+    private Edge(Node to, Node from, Node via) {
         this.to = to;
         this.from = from;
         this.via = via;
+    }
+
+    static Edge fromViaTo(String from, String via, String to) {
+        return new Edge(Node.of(from),Node.of(via),Node.of(to));
     }
 }
