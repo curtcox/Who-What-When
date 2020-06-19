@@ -13,6 +13,6 @@ final class Edge {
     }
 
     static Edge fromViaTo(String from, String via, String to) {
-        return new Edge(Node.of(from),Node.of(via),Node.of(to));
+        return new Edge(Node.of(to),Node.of(from),Node.of(via));
     }
 }

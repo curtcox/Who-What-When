@@ -23,7 +23,10 @@ final class AppPanel extends JPanel {
     }
 
     static AppPanel fromRows(Collection<Row> rows) {
-        return new AppPanel(AppTable.fromRows(rows, row -> System.out.println(row)));
+        var table = AppTable.fromRows(rows);
+        var panel = new AppPanel(table);
+        table.listener = row -> table.setModel(row.asAppTableModel());
+        return panel;
     }
 
 }

@@ -2,13 +2,13 @@ package com.curtcox.www;
 
 class Data {
 
-    static final String me = "me";
-    static final String wife = "my wife";
-    static final String father = "father of";
-    static final String mother = "mother of";
-    static final String brother = "brother of";
-    static final String sister = "sister of";
-    static final String married = "married to";
+    private static final String me = "me";
+    private static final String wife = "my wife";
+    private static final String father = "father of";
+    private static final String mother = "mother of";
+    private static final String brother = "brother of";
+    private static final String sister = "sister of";
+    private static final String married = "married to";
 
     static final Graph graph = Graph.builder()
         .nodes(me,wife,"my son","my daughter","my father","my mother","my brother","my sister")

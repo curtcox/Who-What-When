@@ -9,14 +9,12 @@ final class AppTable extends JTable {
         void onRowSelected(Row row);
     }
 
-    private final RowSelectionListener listener;
+    RowSelectionListener listener;
 
-    private AppTable(RowSelectionListener listener) {
-        this.listener = listener;
-    }
+    private AppTable() {}
 
-    static AppTable fromRows(Collection<Row> rows,RowSelectionListener listener) {
-        var table = new AppTable(listener);
+    static AppTable fromRows(Collection<Row> rows) {
+        var table = new AppTable();
         var model = AppTableModel.fromRows(rows);
         table.setModel(model);
         table.setRowHeight(50);
@@ -25,11 +23,17 @@ final class AppTable extends JTable {
     }
 
     private void addListSelectionListener() {
-        getSelectionModel().addListSelectionListener(event -> listener.onRowSelected(getSelectedRowObject()));
+        getSelectionModel().addListSelectionListener(event -> {
+            Row row = getSelectedRowObject();
+            if (row!=null) {
+                listener.onRowSelected(row);
+            }
+        });
     }
 
     private Row getSelectedRowObject() {
-        return appTableModel().rows.get(getSelectedRow());
+        int row = getSelectedRow();
+        return row < 0 ? null : appTableModel().rows.get(row);
     }
 
     private AppTableModel appTableModel() {

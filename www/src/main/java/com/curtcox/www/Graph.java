@@ -5,11 +5,20 @@ import java.util.*;
 final class Graph {
 
     final List<Node> nodes;
-    final Map<Node, List<Edge>> edges;
+    private final Map<Node, List<Edge>> edges;
 
     Graph(Collection<Node> nodes, Map<Node,List<Edge>> edges) {
         this.nodes = new ArrayList(nodes);
         this.edges = edges;
+    }
+
+    List<Edge> getEdges(Node node) {
+        if (edges.containsKey(node)) {
+            return edges.get(node);
+        }
+        var message = "There is no " + node + " in " + edges;
+        System.out.println(message);
+        return Collections.emptyList();
     }
 
     static final class Builder {
