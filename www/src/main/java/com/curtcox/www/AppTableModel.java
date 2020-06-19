@@ -23,7 +23,7 @@ final class AppTableModel implements TableModel {
     @Override public boolean isCellEditable(int rowIndex, int columnIndex) { return false; }
 
     @Override public int     getRowCount()                 { return rows.size(); }
-    @Override public int     getColumnCount()              { return 2; }
+    @Override public int     getColumnCount()              { return columnNames.length; }
 
     @Override public String getColumnName(int columnIndex) { return columnNames[columnIndex]; }
     @Override public Class<?> getColumnClass(int column)   { return getValueAt(0, column).getClass(); }

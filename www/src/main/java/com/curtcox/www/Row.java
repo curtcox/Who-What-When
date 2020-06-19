@@ -12,14 +12,20 @@ abstract class Row {
             Object getValueAt(int columnIndex) {
                 return n.name;
             }
+
+            @Override
+            String[] columnNames() {
+                return new String[] {"name"};
+            }
         };
     }
 
     abstract Object getValueAt(int columnIndex);
 
-    String[] columnNames() {
-        return new String[] {"edge","node"};
-    }
+    abstract String[] columnNames();
+//    {
+//        return new String[] {"edge","node"};
+//    }
 
     //    String[] columnNames = {"Picture", "Text"};
 //    Object[][] data = {
