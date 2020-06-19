@@ -16,7 +16,7 @@ final class AppTableModel implements TableModel {
         columnNames = this.rows.get(0).columnNames();
     }
 
-    static TableModel fromRows(Collection<Row> rows) {
+    static AppTableModel fromRows(Collection<Row> rows) {
         return new AppTableModel(rows);
     }
 

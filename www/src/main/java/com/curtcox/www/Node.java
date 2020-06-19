@@ -20,4 +20,9 @@ final class Node {
         all.put(name,node);
         return node;
     }
+
+    @Override
+    public String toString() {
+        return name;
+    }
 }

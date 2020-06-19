@@ -6,18 +6,21 @@ import java.net.URL;
 
 abstract class Row {
 
-    public static Object of(Node n) {
-        return new Row() {
-            @Override
-            Object getValueAt(int columnIndex) {
-                return n.name;
-            }
+    private static class NodeRow extends Row {
 
-            @Override
-            String[] columnNames() {
-                return new String[] {"name"};
-            }
-        };
+        final Node node;
+
+        public NodeRow(Node node) {
+          this.node = node;
+        }
+
+        @Override Object getValueAt(int columnIndex) { return node.name; }
+        @Override String[] columnNames()             { return new String[] {"name"}; }
+        @Override public String toString()           { return node.toString(); }
+    }
+
+    public static Object of(Node node) {
+        return new NodeRow(node);
     }
 
     abstract Object getValueAt(int columnIndex);

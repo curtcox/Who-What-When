@@ -11,7 +11,7 @@ class App extends JPanel {
                 .stream()
                 .map(n -> Row.of(n))
                 .collect(Collectors.toList());
-        add(AppTable.fromRows(rows));
+        add(AppPanel.fromRows(rows));
     }
 
 }
