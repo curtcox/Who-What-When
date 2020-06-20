@@ -62,6 +62,8 @@ final class AppPanel extends JPanel
     }
 
     private void setAtRow(Row row) {
+        forward.setEnabled(history.canGoForward());
+        back.setEnabled(history.canGoBack());
         at.setText(row.toString());
         table.setModel(row.asAppTableModel());
     }
