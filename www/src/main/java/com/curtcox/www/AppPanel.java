@@ -2,6 +2,8 @@ package com.curtcox.www;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.*;
+import java.util.List;
 
 final class AppPanel extends JPanel
     implements RowSelectionListener
@@ -12,6 +14,8 @@ final class AppPanel extends JPanel
     final JButton forward = new JButton(">");
     final JButton back = new JButton("<");
     final JButton at = new JButton();
+    final List<Row> history = new ArrayList<>();
+    int historyIndex;
 
     private AppPanel(AppTable table) {
         this.table = table;
@@ -28,13 +32,47 @@ final class AppPanel extends JPanel
     static AppPanel at(Row row) {
         var table = AppTable.empty();
         var panel = new AppPanel(table);
-        panel.setAtRow(row);
-        table.listener = panel;
+        panel.addListeners();
+        panel.goForwardTo(row);
         return panel;
     }
 
+    private void addListeners() {
+        table.listener = this;
+        forward.addActionListener(e -> onForwardButton());
+        back.addActionListener(e -> onBackButton());
+    }
+
+    private void onForwardButton() {
+        if (historyIndex < history.size() - 1) {
+            goForward();
+        }
+    }
+
+    private void onBackButton() {
+        if (historyIndex > 0) {
+            goBackward();
+        }
+    }
+
+    private void goForwardTo(Row row) {
+        history.add(row);
+        historyIndex = history.size() - 1;
+        setAtRow(row);
+    }
+
+    private void goForward() {
+        historyIndex ++;
+        setAtRow(history.get(historyIndex));
+    }
+
+    private void goBackward() {
+        historyIndex --;
+        setAtRow(history.get(historyIndex));
+    }
+
     @Override public void onRowSelected(Row row) {
-        setAtRow(row.primarySelection());
+        goForwardTo(row.primarySelection());
     }
 
     private void setAtRow(Row row) {
