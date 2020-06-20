@@ -14,7 +14,7 @@ abstract class Row {
 
     static Row from(Node node, Edge edge) {
         var other = edge.to == node ? edge.from : edge.to;
-        return new EdgeRow(edge,other);
+        return new EdgeRow(edge.via,other);
     }
 
     private static class NodeRow extends Row {
@@ -34,19 +34,24 @@ abstract class Row {
 
     private static class EdgeRow extends Row {
 
-        final Edge edge;
+        final Node via;
         final Node other;
 
-        EdgeRow(Edge edge, Node other) {
-            this.edge = edge;
+        EdgeRow(Node via, Node other) {
+            this.via = via;
             this.other = other;
         }
 
         @Override Row primarySelection()             { return Row.at(other); }
-        @Override Object getValueAt(int columnIndex) { return columnIndex == 0 ? edge.via : other; }
+        @Override Object getValueAt(int columnIndex) { return columnIndex == 0 ? via : other; }
         @Override String[]          columnNames()    { return new String[] {"via","to"}; }
         @Override AppTableModel asAppTableModel()    { return toAppTableModel(other); }
-        @Override public String toString()           { return edge.toString(); }
+        @Override public String toString()           { return via + other.toString(); }
+        @Override public int hashCode()              { return other.hashCode();}
+        @Override public boolean equals(Object o) {
+            EdgeRow that = (EdgeRow) o;
+            return via == that.via && other == that.other;
+        }
     }
 
     private static AppTableModel toAppTableModel(Node node) {
@@ -58,6 +63,7 @@ abstract class Row {
                 .getEdges(node)
                 .stream()
                 .map(e -> Row.from(node,e))
+                .distinct()
                 .collect(Collectors.toList());
     }
 
