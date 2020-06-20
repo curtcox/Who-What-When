@@ -25,12 +25,6 @@ final class Graph {
         private Set<Node> nodes = new HashSet<>();
         private Map<Node, List<Edge>> edges = new HashMap<>();
 
-        Builder nodes(String... names) {
-            for (var name : names) {
-                nodes.add(Node.of(name));
-            }
-            return this;
-        }
         Builder edge(String from, String via, String to) {
             var edge = Edge.fromViaTo(from,via,to);
             addEdgeToNode(edge,edge.to);
@@ -38,6 +32,7 @@ final class Graph {
             return this;
         }
         void addEdgeToNode(Edge edge, Node node) {
+            nodes.add(node);
             if (!edges.containsKey(node)) {
                 edges.put(node,new ArrayList());
             }
