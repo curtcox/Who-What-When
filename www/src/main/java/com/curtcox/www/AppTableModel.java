@@ -4,20 +4,26 @@ import javax.swing.event.TableModelListener;
 import javax.swing.table.TableModel;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 final class AppTableModel implements TableModel {
 
-    final List<Row> rows;
-    final String[] columnNames;
+    private final List<Row> rows;
+    private final String[] columnNames;
 
-    AppTableModel(Collection<Row> rows) {
+    private AppTableModel(Collection<Row> rows,String[] columnNames) {
         this.rows = new ArrayList(rows);
-        columnNames = this.rows.get(0).columnNames();
+        this.columnNames = columnNames;
     }
 
     static AppTableModel fromRows(Collection<Row> rows) {
-        return new AppTableModel(rows);
+        return new AppTableModel(rows,rows.iterator().next().columnNames());
+    }
+
+    Row getRow(int row) { return rows.get(row); }
+    public static TableModel empty() {
+        return new AppTableModel(Collections.emptyList(),new String[0]);
     }
 
     @Override public boolean isCellEditable(int rowIndex, int columnIndex) { return false; }
@@ -39,4 +45,5 @@ final class AppTableModel implements TableModel {
     private void never() {
         throw new UnsupportedOperationException();
     }
+
 }

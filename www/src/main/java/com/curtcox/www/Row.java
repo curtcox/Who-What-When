@@ -1,7 +1,6 @@
 package com.curtcox.www;
 
 import javax.swing.*;
-import javax.swing.table.TableModel;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Collection;
@@ -9,12 +8,12 @@ import java.util.stream.Collectors;
 
 abstract class Row {
 
+    abstract Row primarySelection();
     abstract Object getValueAt(int columnIndex);
     abstract String[] columnNames();
     abstract AppTableModel asAppTableModel();
 
-    static Row of(Node node) { return new NodeRow(node); }
-    static Row of(Edge edge) { return new EdgeRow(edge); }
+    static Row at(Node node) { return new NodeRow(node); }
 
     private static class NodeRow extends Row {
 
@@ -24,41 +23,48 @@ abstract class Row {
           this.node = node;
         }
 
+        @Override Row primarySelection()             { return Row.at(node); }
         @Override Object getValueAt(int columnIndex) { return node.name; }
-        @Override String[] columnNames()             { return new String[] {"name"}; }
-        @Override AppTableModel asAppTableModel() {
-            return AppTableModel.fromRows(rows());
-        }
+        @Override String[]          columnNames()    { return new String[] {"name"}; }
+        @Override AppTableModel asAppTableModel()    { return AppTableModel.fromRows(rows()); }
         @Override public String toString()           { return node.toString(); }
         Collection<Row> rows() {
             return Data.graph
                     .getEdges(node)
                     .stream()
-                    .map(e -> Row.of(e.to))
+                    .map(e -> Row.from(node,e))
                     .collect(Collectors.toList());
         }
+    }
+
+    static Row from(Node node, Edge edge) {
+        var other = edge.to == node ? edge.from : edge.to;
+        return new EdgeRow(edge,other);
     }
 
     private static class EdgeRow extends Row {
 
         final Edge edge;
+        final Node other;
 
-        public EdgeRow(Edge edge) {
+        EdgeRow(Edge edge, Node other) {
             this.edge = edge;
+            this.other = other;
         }
 
-        @Override Object getValueAt(int columnIndex) { return columnIndex == 0 ? edge.via : edge.to; }
-        @Override String[] columnNames()             { return new String[] {"via","to"}; }
-        @Override AppTableModel asAppTableModel() {
-            return AppTableModel.fromRows(rows());
-        }
+        @Override Row primarySelection()             { return Row.at(other); }
+        @Override Object getValueAt(int columnIndex) { return columnIndex == 0 ? edge.via : other; }
+        @Override String[]          columnNames()    { return new String[] {"via","to"}; }
+        @Override AppTableModel asAppTableModel()    { return AppTableModel.fromRows(rows()); }
         @Override public String toString()           { return edge.toString(); }
         Collection<Row> rows() {
-            throw new IllegalArgumentException();
+            return Data.graph
+                    .getEdges(other)
+                    .stream()
+                    .map(e -> Row.from(other,e))
+                    .collect(Collectors.toList());
         }
     }
-
-
 
     //    String[] columnNames = {"Picture", "Text"};
 //    Object[][] data = {

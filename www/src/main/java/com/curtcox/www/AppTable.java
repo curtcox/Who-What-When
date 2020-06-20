@@ -1,22 +1,16 @@
 package com.curtcox.www;
 
 import javax.swing.*;
-import java.util.Collection;
 
 final class AppTable extends JTable {
-
-    interface RowSelectionListener {
-        void onRowSelected(Row row);
-    }
 
     RowSelectionListener listener;
 
     private AppTable() {}
 
-    static AppTable fromRows(Collection<Row> rows) {
+    static AppTable empty() {
         var table = new AppTable();
-        var model = AppTableModel.fromRows(rows);
-        table.setModel(model);
+        table.setModel(AppTableModel.empty());
         table.setRowHeight(50);
         table.addListSelectionListener();
         return table;
@@ -33,7 +27,7 @@ final class AppTable extends JTable {
 
     private Row getSelectedRowObject() {
         int row = getSelectedRow();
-        return row < 0 ? null : appTableModel().rows.get(row);
+        return row < 0 ? null : appTableModel().getRow(row);
     }
 
     private AppTableModel appTableModel() {

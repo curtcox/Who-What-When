@@ -7,11 +7,12 @@ import java.util.stream.Collectors;
 class App extends JPanel {
 
     App() {
-        List rows = Data.graph.nodes
+        List<Row> rows = Data.graph.nodes
                 .stream()
-                .map(n -> Row.of(n))
+                .map(n -> Row.at(n))
                 .collect(Collectors.toList());
-        add(AppPanel.fromRows(rows));
+        var at = rows.iterator().next();
+        add(AppPanel.at(at));
     }
 
 }

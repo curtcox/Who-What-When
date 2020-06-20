@@ -20,6 +20,7 @@ class Data {
             .edge(me,father,"my daughter")
             .edge(wife,mother,"my son")
             .edge(wife,mother,"my daughter")
+            .edge("my mother",married,"my father")
             .edge("my father",married,"my mother")
             .edge("my father",father,me)
             .edge("my mother",mother,me)

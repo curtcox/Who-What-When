@@ -33,12 +33,15 @@ final class Graph {
         }
         Builder edge(String from, String via, String to) {
             var edge = Edge.fromViaTo(from,via,to);
-            var node = edge.from;
+            addEdgeToNode(edge,edge.to);
+            addEdgeToNode(edge,edge.from);
+            return this;
+        }
+        void addEdgeToNode(Edge edge, Node node) {
             if (!edges.containsKey(node)) {
                 edges.put(node,new ArrayList());
             }
             edges.get(node).add(edge);
-            return this;
         }
         Graph build() {
             return new Graph(nodes,edges);
