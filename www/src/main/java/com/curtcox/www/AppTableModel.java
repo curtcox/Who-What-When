@@ -21,7 +21,6 @@ final class AppTableModel implements TableModel {
         return new AppTableModel(rows,rows.iterator().next().columnNames());
     }
 
-    Row getRow(int row) { return rows.get(row); }
     public static TableModel empty() {
         return new AppTableModel(Collections.emptyList(),new String[0]);
     }
@@ -34,7 +33,7 @@ final class AppTableModel implements TableModel {
     @Override public String getColumnName(int columnIndex) { return columnNames[columnIndex]; }
     @Override public Class<?> getColumnClass(int column)   { return getValueAt(0, column).getClass(); }
 
-    @Override public Object getValueAt(int rowIndex, int columnIndex) {
+    @Override public Node getValueAt(int rowIndex, int columnIndex) {
         return rows.get(rowIndex).getValueAt(columnIndex);
     }
     @Override public void   setValueAt(Object aValue, int rowIndex, int columnIndex) { never(); }

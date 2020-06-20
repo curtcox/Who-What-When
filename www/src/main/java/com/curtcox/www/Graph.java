@@ -28,6 +28,7 @@ final class Graph {
         Builder edge(String from, String via, String to) {
             var edge = Edge.fromViaTo(from,via,to);
             addEdgeToNode(edge,edge.to);
+            addEdgeToNode(edge,edge.via);
             addEdgeToNode(edge,edge.from);
             return this;
         }

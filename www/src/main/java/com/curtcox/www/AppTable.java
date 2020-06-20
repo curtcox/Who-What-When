@@ -12,22 +12,28 @@ final class AppTable extends JTable {
         var table = new AppTable();
         table.setModel(AppTableModel.empty());
         table.setRowHeight(50);
+        table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        table.setColumnSelectionAllowed(true);
+        table.setRowSelectionAllowed(true);
+        table.setCellSelectionEnabled(true);
         table.addListSelectionListener();
         return table;
     }
 
     private void addListSelectionListener() {
         getSelectionModel().addListSelectionListener(event -> {
-            Row row = getSelectedRowObject();
-            if (row!=null) {
-                listener.onRowSelected(row);
+            Node node = getSelectedNode();
+            if (node!=null) {
+                listener.onNodeSelected(node);
             }
         });
     }
 
-    private Row getSelectedRowObject() {
+    private Node getSelectedNode() {
         int row = getSelectedRow();
-        return row < 0 ? null : appTableModel().getRow(row);
+        int col = getSelectedColumn();
+        boolean invalidSelection = row < 0 || col < 0;
+        return invalidSelection ? null : appTableModel().getValueAt(row,col);
     }
 
     private AppTableModel appTableModel() {

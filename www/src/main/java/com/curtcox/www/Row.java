@@ -5,8 +5,7 @@ import java.util.stream.Collectors;
 
 abstract class Row {
 
-    abstract Row primarySelection();
-    abstract Object getValueAt(int columnIndex);
+    abstract Node getValueAt(int columnIndex);
     abstract String[] columnNames();
     abstract AppTableModel asAppTableModel();
 
@@ -25,8 +24,7 @@ abstract class Row {
           this.node = node;
         }
 
-        @Override Row primarySelection()             { return Row.at(node); }
-        @Override Object getValueAt(int columnIndex) { return node.name; }
+        @Override Node getValueAt(int columnIndex)   { return node; }
         @Override String[]          columnNames()    { return new String[] {"name"}; }
         @Override AppTableModel asAppTableModel()    { return toAppTableModel(node); }
         @Override public String toString()           { return node.toString(); }
@@ -42,8 +40,7 @@ abstract class Row {
             this.other = other;
         }
 
-        @Override Row primarySelection()             { return Row.at(other); }
-        @Override Object getValueAt(int columnIndex) { return columnIndex == 0 ? via : other; }
+        @Override Node getValueAt(int columnIndex)   { return columnIndex == 0 ? via : other; }
         @Override String[]          columnNames()    { return new String[] {"via","to"}; }
         @Override AppTableModel asAppTableModel()    { return toAppTableModel(other); }
         @Override public String toString()           { return via + other.toString(); }

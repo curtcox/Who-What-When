@@ -57,8 +57,8 @@ final class AppPanel extends JPanel
         setAtRow(row);
     }
 
-    @Override public void onRowSelected(Row row) {
-        goForwardTo(row.primarySelection());
+    @Override public void onNodeSelected(Node node) {
+        goForwardTo(Row.at(node));
     }
 
     private void setAtRow(Row row) {
