@@ -16,6 +16,7 @@ final class AppTable extends JTable {
         table.setColumnSelectionAllowed(true);
         table.setRowSelectionAllowed(true);
         table.setCellSelectionEnabled(true);
+        table.setTableHeader(null);
         table.addListSelectionListener();
         return table;
     }

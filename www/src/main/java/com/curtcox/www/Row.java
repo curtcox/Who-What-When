@@ -12,8 +12,10 @@ abstract class Row {
     static Row at(Node node) { return new NodeRow(node); }
 
     static Row from(Node node, Edge edge) {
-        var other = edge.to == node ? edge.from : edge.to;
-        return new EdgeRow(edge.via,other);
+        if (node==edge.to) {
+            return new EdgeRow(edge.from,edge.via);
+        }
+        return node == edge.via ? new EdgeRow(edge.from,edge.to) : new EdgeRow(edge.via,edge.to);
     }
 
     private static class NodeRow extends Row {
@@ -32,22 +34,22 @@ abstract class Row {
 
     private static class EdgeRow extends Row {
 
-        final Node via;
-        final Node other;
+        final Node left;
+        final Node right;
 
-        EdgeRow(Node via, Node other) {
-            this.via = via;
-            this.other = other;
+        EdgeRow(Node left, Node right) {
+            this.left = left;
+            this.right = right;
         }
 
-        @Override Node getValueAt(int columnIndex)   { return columnIndex == 0 ? via : other; }
+        @Override Node getValueAt(int columnIndex)   { return columnIndex == 0 ? left : right; }
         @Override String[]          columnNames()    { return new String[] {"via","to"}; }
-        @Override AppTableModel asAppTableModel()    { return toAppTableModel(other); }
-        @Override public String toString()           { return via + other.toString(); }
-        @Override public int hashCode()              { return other.hashCode();}
+        @Override AppTableModel asAppTableModel()    { return toAppTableModel(right); }
+        @Override public String toString()           { return left + right.toString(); }
+        @Override public int hashCode()              { return right.hashCode();}
         @Override public boolean equals(Object o) {
             EdgeRow that = (EdgeRow) o;
-            return via == that.via && other == that.other;
+            return left == that.left && right == that.right;
         }
     }
 
