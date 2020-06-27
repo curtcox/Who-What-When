@@ -5,7 +5,9 @@ import java.util.*;
 public final class Node {
 
     final String name;
-    private static Map<String,Node> all = new HashMap<>();
+    Graph graph;
+
+    private static Map<String, Node> all = new HashMap<>();
 
     private Node(String name) {
         this.name = name;
@@ -16,7 +18,7 @@ public final class Node {
             return all.get(name);
         }
         Node node = new Node(name);
-        all.put(name,node);
+        all.put(name, node);
         return node;
     }
 
@@ -26,6 +28,15 @@ public final class Node {
     }
 
     public String toImage() {
-        return "http://placekitten.com/50/50";
+        for (var edge : getEdges()) {
+            if (edge.via.name.equals("image")) {
+                return edge.to.toString();
+            }
+        }
+        return null;
+    }
+
+    public List<Edge> getEdges() {
+        return graph.getEdges(this);
     }
 }

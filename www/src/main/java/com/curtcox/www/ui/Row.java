@@ -25,8 +25,8 @@ abstract class Row {
     }
 
     private static Collection<Row> rows(Node node) {
-        return App.graph
-                .getEdges(node)
+        return node
+                .getEdges()
                 .stream()
                 .map(e -> Row.from(node,e))
                 .distinct()

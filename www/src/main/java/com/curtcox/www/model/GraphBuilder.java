@@ -21,7 +21,11 @@ public final class GraphBuilder {
         edges.get(node).add(edge);
     }
     public Graph build() {
-        return new Graph(nodes,edges);
+        var graph = new Graph(nodes,edges);
+        for (var node : nodes) {
+            node.graph = graph;
+        }
+        return graph;
     }
 
     public static GraphBuilder of() {

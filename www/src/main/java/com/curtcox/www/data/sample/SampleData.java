@@ -12,6 +12,10 @@ me,brother of,my brother
 me,sister of,my sister
 me,father of,my son
 me,father of,my daughter
+my daughter,has cat,my daughter's cat
+my daughter's cat,image,http://placekitten.com/50/50
+me,has cat,my cat
+my cat,image,http://placekitten.com/49/49
 
 my wife,married to,me
 my wife,mother of,my son

@@ -12,7 +12,7 @@ public final class Graph {
         this.edges = edges;
     }
 
-    public List<Edge> getEdges(Node node) {
+    List<Edge> getEdges(Node node) {
         if (edges.containsKey(node)) {
             return edges.get(node);
         }
