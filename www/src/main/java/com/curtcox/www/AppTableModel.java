@@ -1,5 +1,7 @@
 package com.curtcox.www;
 
+import com.curtcox.www.model.Node;
+
 import javax.swing.event.TableModelListener;
 import javax.swing.table.TableModel;
 import java.util.ArrayList;

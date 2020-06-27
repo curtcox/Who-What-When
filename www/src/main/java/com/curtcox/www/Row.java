@@ -1,5 +1,8 @@
 package com.curtcox.www;
 
+import com.curtcox.www.model.Edge;
+import com.curtcox.www.model.Node;
+
 import java.util.Collection;
 import java.util.stream.Collectors;
 
@@ -58,7 +61,7 @@ abstract class Row {
     }
 
     private static Collection<Row> rows(Node node) {
-        return Data.graph
+        return App.graph
                 .getEdges(node)
                 .stream()
                 .map(e -> Row.from(node,e))

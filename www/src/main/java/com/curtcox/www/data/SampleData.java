@@ -1,8 +1,8 @@
-package com.curtcox.www;
+package com.curtcox.www.data;
 
-class Data {
+final class SampleData {
 
-    private static String data =
+    static String data =
 """
 me,married to,my wife
 me,brother of,my brother
@@ -56,21 +56,5 @@ my father's father,father of,my father
 my father's father,father of,my father's brother
 
 """;
-
-    static final Graph graph = buildGraph();
-
-    static Graph buildGraph() {
-        var builder = Graph.builder();
-        for (var line : data.split("\\r?\\n")) {
-            var parts = line.split(",");
-            if (parts.length==3) {
-                String from = parts[0];
-                String via = parts[1];
-                String to = parts[2];
-                builder = builder.edge(from,via,to);
-            }
-        }
-        return builder.build();
-    }
 
 }

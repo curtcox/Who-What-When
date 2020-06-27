@@ -1,9 +1,8 @@
-package com.curtcox.www;
+package com.curtcox.www.model;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
-final class Node {
+public final class Node {
 
     final String name;
     private static Map<String,Node> all = new HashMap<>();

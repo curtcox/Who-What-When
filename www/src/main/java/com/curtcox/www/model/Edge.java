@@ -1,10 +1,10 @@
-package com.curtcox.www;
+package com.curtcox.www.model;
 
-final class Edge {
+public final class Edge {
 
-    final Node to;
-    final Node from;
-    final Node via; // edge type
+    public final Node to;
+    public final Node from;
+    public final Node via; // edge type
 
     private Edge(Node to, Node from, Node via) {
         this.to = to;
@@ -12,7 +12,7 @@ final class Edge {
         this.via = via;
     }
 
-    static Edge fromViaTo(String from, String via, String to) {
+    public static Edge fromViaTo(String from, String via, String to) {
         return new Edge(Node.of(to),Node.of(from),Node.of(via));
     }
 
