@@ -36,6 +36,10 @@ public final class Node {
         return null;
     }
 
+    public int getHeight() {
+        return toImage() == null ? 30 : 100;
+    }
+
     public List<Edge> getEdges() {
         return graph.getEdges(this);
     }

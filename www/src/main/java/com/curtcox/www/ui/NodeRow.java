@@ -13,6 +13,8 @@ final class NodeRow extends Row {
     @Override Node getValueAt(int columnIndex)   { return node; }
     @Override String[]          columnNames()    { return new String[] {"name"}; }
     @Override AppTableModel asAppTableModel()    { return toAppTableModel(node); }
+                            int   getHeight()    { return node.getHeight(); }
+
     @Override public String toString()           { return node.toString(); }
 
 }

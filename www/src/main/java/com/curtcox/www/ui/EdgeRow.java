@@ -16,7 +16,9 @@ final class EdgeRow extends Row {
     @Override String[]          columnNames()    { return new String[] {"via","to"}; }
     @Override AppTableModel asAppTableModel()    { return toAppTableModel(right); }
     @Override public String toString()           { return left + right.toString(); }
-    @Override public int hashCode()              { return right.hashCode();}
+    @Override public int    hashCode()           { return right.hashCode(); }
+                     int   getHeight()           { return Math.max(left.getHeight(),right.getHeight()); }
+
     @Override public boolean equals(Object o) {
         EdgeRow that = (EdgeRow) o;
         return left == that.left && right == that.right;

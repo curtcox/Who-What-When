@@ -10,6 +10,7 @@ abstract class Row {
     abstract Node getValueAt(int columnIndex);
     abstract String[] columnNames();
     abstract AppTableModel asAppTableModel();
+    abstract int getHeight();
 
     static Row at(Node node) { return new NodeRow(node); }
 

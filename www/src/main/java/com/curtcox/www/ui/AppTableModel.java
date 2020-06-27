@@ -31,6 +31,7 @@ final class AppTableModel implements TableModel {
 
     @Override public int     getRowCount()                 { return rows.size(); }
     @Override public int     getColumnCount()              { return columnNames.length; }
+                     int     getRowHeight(int rowIndex)    { return rows.get(rowIndex).getHeight(); }
 
     @Override public String getColumnName(int columnIndex) { return columnNames[columnIndex]; }
     @Override public Class<?> getColumnClass(int column)   { return getValueAt(0, column).getClass(); }

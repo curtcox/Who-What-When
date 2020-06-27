@@ -13,9 +13,9 @@ me,sister of,my sister
 me,father of,my son
 me,father of,my daughter
 my daughter,has cat,my daughter's cat
-my daughter's cat,image,http://placekitten.com/50/50
+my daughter's cat,image,http://placekitten.com/100/100
 me,has cat,my cat
-my cat,image,http://placekitten.com/49/49
+my cat,image,http://placekitten.com/99/99
 
 my wife,married to,me
 my wife,mother of,my son
