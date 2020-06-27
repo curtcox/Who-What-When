@@ -1,4 +1,4 @@
-package com.curtcox.www;
+package com.curtcox.www.ui;
 
 import com.curtcox.www.model.Node;
 

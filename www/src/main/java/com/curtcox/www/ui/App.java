@@ -1,4 +1,4 @@
-package com.curtcox.www;
+package com.curtcox.www.ui;
 
 import com.curtcox.www.data.Edges;
 import com.curtcox.www.model.Graph;
@@ -7,7 +7,7 @@ import javax.swing.JPanel;
 import java.util.List;
 import java.util.stream.Collectors;
 
-class App extends JPanel {
+final class App extends JPanel {
 
     static final Graph graph = buildGraph();
 
