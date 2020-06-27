@@ -1,6 +1,6 @@
 package com.curtcox.www;
 
-import com.curtcox.www.data.Data;
+import com.curtcox.www.data.Edges;
 import com.curtcox.www.model.Graph;
 
 import javax.swing.JPanel;
@@ -22,7 +22,7 @@ class App extends JPanel {
 
     static Graph buildGraph() {
         var builder = Graph.builder();
-        for (var edge : Data.edges()) {
+        for (var edge : Edges.edges()) {
             builder = builder.edge(edge);
         }
         return builder.build();

@@ -1,8 +1,11 @@
-package com.curtcox.www.data;
+package com.curtcox.www.data.sample;
 
-final class SampleData {
+import com.curtcox.www.data.Data;
 
-    static String data =
+public final class SampleData implements Data {
+
+    public String root() {
+        return
 """
 me,married to,my wife
 me,brother of,my brother
@@ -56,5 +59,5 @@ my father's father,father of,my father
 my father's father,father of,my father's brother
 
 """;
-
+    }
 }
