@@ -33,19 +33,4 @@ abstract class Row {
                 .collect(Collectors.toList());
     }
 
-    //    String[] columnNames = {"Picture", "Text"};
-//    Object[][] data = {
-//            {icon("http://placekitten.com/100/200"), "Text 1"},
-//            {icon("http://placekitten.com/100/200"), "Text 2"},
-//            {icon("http://placekitten.com/100/200"), "Text 3"},
-//    };
-
-//    private static ImageIcon icon(String url) {
-//        try {
-//            return new ImageIcon(new URL(url));
-//        } catch (MalformedURLException e) {
-//            throw new RuntimeException(e);
-//        }
-//    }
-
 }

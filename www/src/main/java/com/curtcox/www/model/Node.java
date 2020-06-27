@@ -24,4 +24,8 @@ public final class Node {
     public String toString() {
         return name;
     }
+
+    public String toImage() {
+        return "http://placekitten.com/50/50";
+    }
 }

@@ -3,6 +3,8 @@ package com.curtcox.www.ui;
 import com.curtcox.www.model.Node;
 
 import javax.swing.*;
+import javax.swing.table.TableCellRenderer;
+import java.awt.*;
 
 final class AppTable extends JTable {
 
@@ -20,6 +22,7 @@ final class AppTable extends JTable {
         table.setCellSelectionEnabled(true);
         table.setTableHeader(null);
         table.addListSelectionListener();
+        table.setDefaultRenderer(Node.class, new NodeRenderer());
         return table;
     }
 

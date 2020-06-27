@@ -13,7 +13,7 @@ final class AppPanel extends JPanel
     final AppTable table;
     final JButton forward = new JButton(">");
     final JButton    back = new JButton("<");
-    final JButton      at = new JButton();
+    final NodeRenderer at = new NodeRenderer();
     final History history = new History();
 
     private AppPanel(AppTable table) {
@@ -66,7 +66,7 @@ final class AppPanel extends JPanel
     private void setAtRow(Row row) {
         forward.setEnabled(history.canGoForward());
         back.setEnabled(history.canGoBack());
-        at.setText(row.toString());
+        at.setAt(row);
         table.setModel(row.asAppTableModel());
     }
 
