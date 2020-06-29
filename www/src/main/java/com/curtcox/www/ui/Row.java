@@ -5,7 +5,7 @@ import com.curtcox.www.model.*;
 import java.util.Collection;
 import java.util.stream.Collectors;
 
-abstract class Row {
+abstract class Row implements Comparable<Row> {
 
     abstract Node getValueAt(int columnIndex);
     abstract String[] columnNames();
@@ -31,7 +31,13 @@ abstract class Row {
                 .stream()
                 .map(e -> Row.from(node,e))
                 .distinct()
+                .sorted()
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public int compareTo(Row that) {
+        return toString().compareTo(that.toString());
     }
 
 }
