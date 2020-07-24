@@ -19,10 +19,40 @@ public class GraphBuilderTest {
         assertTrue(graph!=null);
         assertTrue(graph.nodes.size()==4);
         assertGraphContainsAllNodes(graph,"from","via","to","");
+        assertEdgeCountAt(graph,"from",2);
+        assertEdgeCountAt(graph,"via",2);
+        assertEdgeCountAt(graph,"to",2);
+        assertEdgeCountAt(graph,"",4);
         assertGraphContainsEdge(graph,"from","from","via","to");
+        assertGraphContainsEdge(graph,"from","from","","");
     }
 
-    private void assertGraphContainsAllNodes(Graph graph, String... names) {
+    @Test public void graph_with_two_edges() {
+        var graph = Graph.builder()
+                .edge(Edge.fromViaTo("a","-","b"))
+                .edge(Edge.fromViaTo("b","-","c"))
+                .build();
+        assertTrue(graph!=null);
+        assertTrue(graph.nodes.size()==5);
+        assertGraphContainsAllNodes(graph,"a","b","c","-","");
+        assertEdgeCountAt(graph,"a",2);
+        assertEdgeCountAt(graph,"b",3);
+        assertEdgeCountAt(graph,"c",2);
+        assertEdgeCountAt(graph,"",6);
+        assertGraphContainsEdge(graph,"a","a","-","b");
+        assertGraphContainsEdge(graph,"a","a","","");
+        assertGraphContainsEdge(graph,"b","b","-","c");
+        assertGraphContainsEdge(graph,"b","b","","");
+        assertGraphContainsEdge(graph,"c","c","","");
+    }
+
+    void assertEdgeCountAt(Graph graph,String name,int expected) {
+        int actual = graph.getEdges(Node.of(name)).size();
+        var message = "Expected " + graph + " to have " + expected + " edges but had " + actual;
+        assertEquals(message,expected,actual);
+    }
+
+    void assertGraphContainsAllNodes(Graph graph, String... names) {
         for (var name : names) {
             assertTrue(graph.nodes.contains(Node.of(name)));
         }

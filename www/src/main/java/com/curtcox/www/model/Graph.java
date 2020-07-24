@@ -24,4 +24,8 @@ public final class Graph {
     public static GraphBuilder builder() {
         return GraphBuilder.of();
     }
+
+    @Override public String toString() {
+        return "nodes = " + nodes + " edges = " + edges;
+    }
 }
