@@ -1,5 +1,7 @@
 package com.curtcox.www.ui;
 
+import com.curtcox.www.model.Name;
+
 import javax.swing.*;
 import java.net.*;
 
@@ -13,4 +15,7 @@ final class Image {
         }
     }
 
+    static boolean isValid(String name) {
+        return Name.isImage(name);
+    }
 }

@@ -2,19 +2,21 @@ package com.curtcox.www.model;
 
 import java.util.*;
 
+import static com.curtcox.www.model.Name.IMAGE;
+
 public final class Node {
 
     final String name;
     Graph graph;
 
+    private static final int TEXT_HEIGHT = 30;
+    private static final int IMAGE_HEIGHT = 100;
+
     private static Map<String, Node> all = new HashMap<>();
     private static String HOME = home();
-    private static String IMAGE = "image";
 
     private static String home() {
-        int[] emojis = { 0x1F3E0 };
-        String text = new String(emojis, 0, emojis.length);
-        return text;
+        return "*";
     }
 
     private Node(String name) {
@@ -36,13 +38,14 @@ public final class Node {
     }
 
     public String toImage() {
+        if (isHome())   { return HOME;      }
         if (isImage())  { return name;      }
         if (hasImage()) { return imageOf(); }
         return null;
     }
 
     public int getHeight() {
-        return toImage() == null ? 30 : 100;
+        return isHome() || toImage() == null ? TEXT_HEIGHT : IMAGE_HEIGHT;
     }
 
     public List<Edge> getEdges() {
@@ -50,7 +53,11 @@ public final class Node {
     }
 
     private boolean isImage() {
-        return name.startsWith("http");
+        return Name.isImage(name);
+    }
+
+    private boolean isHome() {
+        return name.equals("");
     }
 
     private boolean hasImage() {

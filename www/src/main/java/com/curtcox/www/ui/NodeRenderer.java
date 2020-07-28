@@ -27,6 +27,17 @@ final class NodeRenderer extends JLabel
     private void setNode(Node node) {
         setText(node.toString());
         var image = node.toImage();
-        setIcon(image == null ? null : Image.of(image));
+        setImage(image);
     }
+
+    private void setImage(String image) {
+        if (image == null) {
+            setIcon(null);
+        } else if (Image.isValid(image)){
+            setIcon(Image.of(image));
+        } else {
+            setText(image);
+        }
+    }
+
 }
